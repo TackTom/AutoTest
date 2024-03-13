@@ -1,0 +1,20 @@
+[
+  {
+    "book_id": "89530",
+    "status_code": 200,
+    "info": "Success",
+    "code": 1
+  },
+  {
+    "book_id": "89530",
+    "status_code": 200,
+    "info": "重复添加",
+    "code": 0
+  },
+  {
+    "book_id": "",
+    "status_code": 200,
+    "info": "书籍id不能为空",
+    "code": 0
+  }
+]

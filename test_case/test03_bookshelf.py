@@ -1,51 +1,51 @@
+import json
+import pytest
 from api.login import LoginApi
+from common.userlogin import UserLogin
 import hashlib
 
-class TestBookshelf:
-    # 初始化token
-    # token = None
 
-    # 前置处理
-    def setup(self):
+
+def build_data(file_data):
+    book_data = []
+
+    with open(file_data, "rb") as f:
+        json_data = json.load(f)
+        for case_data in json_data:
+            book_id = case_data.get("book_id")
+            status_code = case_data.get("status_code")
+            info = case_data.get("info")
+            code = case_data.get("code")
+
+        book_data.append((book_id, status_code, info, code))
+
+    return book_data
+
+class TestBookself:
+
+    token = None
+
+    def setup_method(self):
         self.login_api = LoginApi()
+        self.login_user = UserLogin()
 
-    # 后置处理
-    def teardown(self):
+
+        res_l = self.login_user.login_method()
+
+        TestBookself.token = res_l.json().get("data").get("token")
+        print(TestBookself.token)
+
+
+
+
+    def teardown_method(self):
         pass
 
-    # 登录
-    def test01_putin_bookshelf_success(self):
-        header_json = {
-            "Content-Type": "application/json"
-        }
+    @pytest.mark.parametrize("book_id, status_code, info, code", build_data(file_data="../data/test03_bookshelf.json"))
+    def test_bookself(self, book_id, status_code, info, code):
+        res_bs = self.login_api.putin_bookshelf(json_data=book_id, token=TestBookself.token)
 
-        login_data = {
-            "type": 2,
-            "phone": "18280803475",
-            # 把密码转换成MD5码
-            "password": hashlib.md5(b"5201314star").hexdigest()
-        }
-        # 用户登录
-        res_login = LoginApi().login_method(json_data=login_data, header_data=header_json)
-        print(res_login.status_code)
-        print(res_login.json())
+        assert status_code == res_bs.status_code
+        assert info in res_bs.json().get("info")
+        assert code == res_bs.json().get("code")
 
-    # 获取书本
-        res_book = LoginApi().get_book()
-        print(res_book.status_code)
-        print(res_book.json())
-
-    # 放入书架
-        header_json = {
-            "Content-Type": "application/json"
-        }
-        bookshelf_data={
-            "book_id":  res_book.json().get("data").get("book").get("book_id")
-        }
-
-        TestBookshelf.token = res_login.json().get("data").get("token")
-        print(TestBookshelf.token)
-
-        res_bookshelf = LoginApi().putin_bookshelf(json_data=bookshelf_data, token=TestBookshelf.token)
-        print(res_bookshelf.status_code)
-        print(res_bookshelf.json())

@@ -9,16 +9,16 @@ class LoginApi:
     # 定义接口地址
     def __init__(self):
         self.login_url = "https://pcuserapi.xwabx.com/v1/user/login"
-        self.getbook_url = "https://pcuserapi.xwabx.com/v1/book/getBookInfo?book_id=89530"
+        self.getbook_url = "https://pcuserapi.xwabx.com/v1/book/getBookInfo"
         self.putin_bookshelf_url = "https://pcuserapi.xwabx.com/v1/book/shelve/create"
 
-    def login_method(self, json_data, header_data):
+    def login_method(self, json_data):
         requests.packages.urllib3.disable_warnings()
-        return requests.post(url=self.login_url, json=json_data, headers=header_data, verify=False)
+        return requests.post(url=self.login_url, json=json_data, verify=False)
 
-    def get_book(self):
+    def get_book(self, test_data):
         requests.packages.urllib3.disable_warnings()
-        return requests.get(url=self.getbook_url, verify=False)
+        return requests.get(url=self.getbook_url + f"/{test_data}", verify=False)
 
     def putin_bookshelf(self, json_data, token):
         requests.packages.urllib3.disable_warnings()

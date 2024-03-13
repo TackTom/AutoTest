@@ -1,0 +1,26 @@
+[
+  {
+    "phone": "18280803475",
+    "password": "5201314star",
+    "status_code": 200,
+    "info": "Success",
+    "code": 1
+  },
+  {
+    "phone": "",
+    "password": "5201314star",
+    "status_code": 200,
+    "info": "手机号不能为空",
+    "code": 0
+  },
+  {
+    "phone": "18280803475",
+    "password": "5201314sta",
+    "status_code": 200,
+    "info": "密码不正确",
+    "code": 0
+  }
+]
+
+
+
