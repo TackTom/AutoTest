@@ -11,6 +11,7 @@ class LoginApi:
         self.login_url = "https://pcuserapi.xwabx.com/v1/user/login"
         self.getbook_url = "https://pcuserapi.xwabx.com/v1/book/getBookInfo"
         self.putin_bookshelf_url = "https://pcuserapi.xwabx.com/v1/book/shelve/create"
+        self.deletebook_url = "https://pcuserapi.xwabx.com/v1/book/shelve/delete"
 
     def login_method(self, json_data):
         requests.packages.urllib3.disable_warnings()
@@ -23,6 +24,12 @@ class LoginApi:
     def putin_bookshelf(self, json_data, token):
         requests.packages.urllib3.disable_warnings()
         return requests.post(url=self.putin_bookshelf_url, json=json_data, headers={"Authorization": token}, verify=False)
+
+    def book_delete(self, json_data, token):
+        requests.packages.urllib3.disable_warnings()
+        return requests.delete(url=self.deletebook_url, json=json_data, headers={"Authorization": token}, verify=False)
+
+
 
 
 

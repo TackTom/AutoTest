@@ -17,7 +17,7 @@ def build_data(file_data):
             info = case_data.get("info")
             code = case_data.get("code")
 
-        book_data.append((book_id, status_code, info, code))
+            book_data.append((book_id, status_code, info, code))
 
     return book_data
 
@@ -43,7 +43,11 @@ class TestBookself:
 
     @pytest.mark.parametrize("book_id, status_code, info, code", build_data(file_data="../data/test03_bookshelf.json"))
     def test_bookself(self, book_id, status_code, info, code):
-        res_bs = self.login_api.putin_bookshelf(json_data=book_id, token=TestBookself.token)
+
+        test_book = {
+            "book_id": book_id
+        }
+        res_bs = self.login_api.putin_bookshelf(json_data=test_book, token=TestBookself.token)
 
         assert status_code == res_bs.status_code
         assert info in res_bs.json().get("info")
