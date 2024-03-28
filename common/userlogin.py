@@ -1,9 +1,10 @@
 import hashlib
 import requests
+import config
 
 class UserLogin:
     def __init__(self):
-        self.login_url = "https://pcuserapi.xwabx.com/v1/user/login"
+        self.login_url = config.BASE_URL + "/v1/user/login"
         self.login_body = {
             "type": 2,
             "phone": "18280803475",

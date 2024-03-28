@@ -2,6 +2,7 @@ import json
 from api.login import LoginApi
 import hashlib
 import pytest
+import config
 
 
 def build_data(json_file):
@@ -33,7 +34,8 @@ class TestLogin:
         pass
 
     # 测试手机号和密码正确登录成功
-    @pytest.mark.parametrize("phone,password,status_code,info,code", build_data(json_file="../data/test01_login.json"))
+    @pytest.mark.parametrize("phone,password,status_code,info,code",
+                             build_data(json_file=config.BASE_PATH + "/data/test01_login.json"))
     def test_login01(self, phone, password, status_code, info, code):
         login_data = {
             "type": 2,

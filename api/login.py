@@ -1,5 +1,6 @@
 import requests
 import hashlib
+import config
 
 """接口封装时，重点是依据接口文档封装接口信息，需要使用的测试数据是从测试用例传递、接口方法被调用是需要返回对应的响应结果
 """
@@ -8,10 +9,10 @@ class LoginApi:
     # 初始化
     # 定义接口地址
     def __init__(self):
-        self.login_url = "https://pcuserapi.xwabx.com/v1/user/login"
-        self.getbook_url = "https://pcuserapi.xwabx.com/v1/book/getBookInfo"
-        self.putin_bookshelf_url = "https://pcuserapi.xwabx.com/v1/book/shelve/create"
-        self.deletebook_url = "https://pcuserapi.xwabx.com/v1/book/shelve/delete"
+        self.login_url = config.BASE_URL + "/v1/user/login"
+        self.getbook_url = config.BASE_URL + "/v1/book/getBookInfo"
+        self.putin_bookshelf_url = config.BASE_URL + "/v1/book/shelve/create"
+        self.deletebook_url = config.BASE_URL + "/v1/book/shelve/delete"
 
     def login_method(self, json_data):
         requests.packages.urllib3.disable_warnings()

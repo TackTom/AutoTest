@@ -2,6 +2,7 @@ import json
 
 import pytest
 
+import config
 from api.login import LoginApi
 from common.userlogin import UserLogin
 
@@ -22,9 +23,11 @@ def build_data(json_file):
     return json_data
 
 
+
+
 class TestBookDelete:
 
-    token= None
+    token = None
 
     def setup_method(self):
         self.login_api = LoginApi()
@@ -45,7 +48,8 @@ class TestBookDelete:
     def teardown_method(self):
         pass
 
-    @pytest.mark.parametrize("book_id,status_code,info,code", build_data(json_file="../data/test04_bookdetele.json"))
+    @pytest.mark.parametrize("book_id,status_code,info,code",
+                             build_data(json_file=config.BASE_PATH + "/data/test04_bookdetele.json"))
     def test_bookdelete(self, book_id, status_code, info, code):
         test_book= {
             "book_id": book_id
@@ -55,3 +59,6 @@ class TestBookDelete:
         assert status_code == res_bookdelete.status_code
         assert info in res_bookdelete.json().get("info")
         assert code == res_bookdelete.json().get("code")
+
+        print(res_bookdelete.status_code)
+        print(res_bookdelete.json())

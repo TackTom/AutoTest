@@ -1,5 +1,7 @@
 import json
 import pytest
+
+import config
 from api.login import LoginApi
 from common.userlogin import UserLogin
 import hashlib
@@ -41,7 +43,8 @@ class TestBookself:
     def teardown_method(self):
         pass
 
-    @pytest.mark.parametrize("book_id, status_code, info, code", build_data(file_data="../data/test03_bookshelf.json"))
+    @pytest.mark.parametrize("book_id, status_code, info, code",
+                             build_data(file_data=config.BASE_PATH + "/data/test03_bookshelf.json"))
     def test_bookself(self, book_id, status_code, info, code):
 
         test_book = {
